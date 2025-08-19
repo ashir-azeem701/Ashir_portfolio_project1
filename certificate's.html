@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Professional Certificates</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #9b59b6;
+            --dark-color: #2c3e50;
+            --light-color: #f5f7fa;
+        }
+        
+        body {
+            min-height: 100vh;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+        
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            transition: background 1.5s ease;
+        }
+        
+        .bg-color-0 { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); }
+        .bg-color-1 { background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%); }
+        .bg-color-2 { background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); }
+        .bg-color-3 { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            bottom: -10px;
+            left: 15%;
+            border-radius: 2px;
+        }
+        
+        p.subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .certificate-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .certificate-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            height: 400px;
+            perspective: 1000px;
+            background: white;
+            z-index: 2;
+        }
+        
+        .certificate-item-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .certificate-item:hover .certificate-item-inner {
+            transform: rotateY(15deg) scale(1.03);
+        }
+        
+        .certificate-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .certificate-item:hover .certificate-img {
+            transform: scale(1.05);
+        }
+        
+        .certificate-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 30px 20px 20px;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(5px);
+            z-index: 4;
+        }
+        
+        .certificate-item:hover .certificate-overlay {
+            opacity: 1;
+        }
+        
+        .certificate-title {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .certificate-issuer {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .certificate-date {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+        
+        .certificate-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 15px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .view-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+            color: white;
+            backdrop-filter: blur(5px);
+        }
+        
+        .view-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .download-btn {
+            background: rgba(255,255,255,0.9);
+            color: var(--dark-color);
+        }
+        
+        .download-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .share-btn {
+            background: rgba(0,0,0,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .share-btn:hover {
+            background: rgba(0,0,0,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #2ecc71, #1abc9c);
+            width: 0;
+            transition: width 0.5s ease;
+            border-radius: 3px;
+        }
+        
+        .verification-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 5;
+        }
+        
+        .confetti-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            text-align: center;
+            background: transparent;
+            padding: 15px;
+            border-radius: 10px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .lightbox-img-container {
+            position: relative;
+            max-width: 100%;
+            max-height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.5s ease;
+        }
+        
+        .lightbox-img.flip-out {
+            animation: flipOut 0.5s ease forwards;
+        }
+        
+        .lightbox-img.flip-in {
+            animation: flipIn 0.5s ease forwards;
+        }
+        
+        @keyframes flipOut {
+            0% { transform: rotateY(0deg) scale(1); opacity: 1; }
+            50% { transform: rotateY(90deg) scale(0.8); opacity: 0.5; }
+            100% { transform: rotateY(180deg) scale(0.6); opacity: 0; }
+        }
+        
+        @keyframes flipIn {
+            0% { transform: rotateY(180deg) scale(0.6); opacity: 0; }
+            50% { transform: rotateY(90deg) scale(0.8); opacity: 0.5; }
+            100% { transform: rotateY(0deg) scale(1); opacity: 1; }
+        }
+        
+        .lightbox-details {
+            text-align: center;
+            padding: 10px;
+            background: transparent;
+            border-radius: 8px;
+            margin-top: 10px;
+            color: white;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5);
+            max-width: 80%;
+        }
+        
+        .lightbox-details h3 {
+            color: white;
+            margin-bottom: 8px;
+            font-size: 1.5rem;
+        }
+        
+        .lightbox-details p {
+            color: #e0e0e0;
+            margin-bottom: 4px;
+            font-size: 1rem;
+        }
+        
+        .lightbox-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .lightbox-btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .lightbox-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .close-btn {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 1002;
+            background: rgba(0,0,0,0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .close-btn:hover {
+            color: #ccc;
+            transform: scale(1.1);
+            background: rgba(0,0,0,0.7);
+        }
+        
+        .nav-btn {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+            user-select: none;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            z-index: 1003;
+        }
+        
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #2980b9, #8e44ad);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .nav-btn.clicked {
+            animation: glow 0.4s ease;
+        }
+        
+        @keyframes glow {
+            0% { transform: translateY(-50%) scale(1); box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
+            50% { transform: translateY(-50%) scale(1.15); box-shadow: 0 0 15px rgba(52,152,219,0.7); }
+            100% { transform: translateY(-50%) scale(1); box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
+        }
+        
+        .prev-btn {
+            left: 20px;
+        }
+        
+        .next-btn {
+            right: 20px;
+        }
+        
+        .share-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .share-modal.active {
+            display: flex;
+        }
+        
+        .share-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+        
+        .share-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #7f8c8d;
+        }
+        
+        .share-title {
+            margin-bottom: 15px;
+            color: var(--dark-color);
+            font-size: 1.3rem;
+        }
+        
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            text-decoration: none;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        .facebook { background: #3b5998; }
+        .twitter { background: #1da1f2; }
+        .linkedin { background: #0077b5; }
+        .whatsapp { background: #25d366; }
+        .instagram { background: #e1306c; }
+        .tiktok { background: #000000; }
+        
+        @media (max-width: 768px) {
+            .certificate-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-btn {
+                font-size: 20px;
+                width: 40px;
+                height: 40px;
+            }
+            
+            .prev-btn {
+                left: 10px;
+            }
+            
+            .next-btn {
+                right: 10px;
+            }
+            
+            .lightbox-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .lightbox-btn {
+                width: 100%;
+                max-width: 200px;
+                justify-content: center;
+                font-size: 0.85rem;
+            }
+            
+            .lightbox-content {
+                width: 95%;
+                max-height: 95vh;
+                padding: 10px;
+            }
+            
+            .lightbox-img {
+                max-height: 60vh;
+                max-width: 95vw;
+            }
+            
+            .lightbox-details h3 {
+                font-size: 1.2rem;
+            }
+            
+            .lightbox-details p {
+                font-size: 0.9rem;
+            }
+            
+            .close-btn {
+                top: 10px;
+                right: 15px;
+                font-size: 30px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="parallax-bg bg-color-0" id="parallax-bg"></div>
+    
+    <div class="container">
+        <header class="animate__animated animate__fadeInDown">
+            <h1>My Professional Certificates</h1>
+            <p class="subtitle">A showcase of my achievements, qualifications, and verified credentials in my professional journey</p>
+        </header>
+        
+        <div class="certificate-gallery">
+            <canvas class="confetti-canvas" id="confetti-canvas"></canvas>
+            <div class="certificate-item animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                <div class="certificate-item-inner">
+                    <img src="metricRC.jpg" alt="Web Development Certificate" class="certificate-img" data-index="0">
+                    <div class="verification-badge">
+                        <i class="fas fa-check-circle"></i> Verified
+                    </div>
+                    <div class="certificate-overlay">
+                        <h3 class="certificate-title">Web Development Master</h3>
+                        <p class="certificate-issuer">Issued by Tech Academy</p>
+                        <p class="certificate-date">Completed: June 2023</p>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                        <div class="certificate-actions">
+                            <button class="action-btn view-btn" data-index="0">
+                                <i class="fas fa-expand"></i> View
+                            </button>
+                            <button class="action-btn download-btn" data-index="0">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                            <button class="action-btn share-btn">
+                                <i class="fas fa-share-alt"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="certificate-item animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                <div class="certificate-item-inner">
+                    <img src="interRC.jpg" alt="Data Science Certificate" class="certificate-img" data-index="1">
+                    <div class="verification-badge">
+                        <i class="fas fa-check-circle"></i> Verified
+                    </div>
+                    <div class="certificate-overlay">
+                        <h3 class="certificate-title">Data Science Fundamentals</h3>
+                        <p class="certificate-issuer">Issued by Data Institute</p>
+                        <p class="certificate-date">Completed: March 2023</p>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                        <div class="certificate-actions">
+                            <button class="action-btn view-btn" data-index="1">
+                                <i class="fas fa-expand"></i> View
+                            </button>
+                            <button class="action-btn download-btn" data-index="1">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                            <button class="action-btn share-btn">
+                                <i class="fas fa-share-alt"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="certificate-item animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                <div class="certificate-item-inner">
+                    <img src="metricRC.jpg" alt="UX Design Certificate" class="certificate-img" data-index="2">
+                    <div class="verification-badge">
+                        <i class="fas fa-check-circle"></i> Verified
+                    </div>
+                    <div class="certificate-overlay">
+                        <h3 class="certificate-title">UX Design Professional</h3>
+                        <p class="certificate-issuer">Issued by Design School</p>
+                        <p class="certificate-date">Completed: January 2023</p>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                        <div class="certificate-actions">
+                            <button class="action-btn view-btn" data-index="2">
+                                <i class="fas fa-expand"></i> View
+                            </button>
+                            <button class="action-btn download-btn" data-index="2">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                            <button class="action-btn share-btn">
+                                <i class="fas fa-share-alt"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="certificate-item animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                <div class="certificate-item-inner">
+                    <img src="NICON Certificate.jpg" alt="Project Management Certificate" class="certificate-img" data-index="3">
+                    <div class="verification-badge">
+                        <i class="fas fa-check-circle"></i> Verified
+                    </div>
+                    <div class="certificate-overlay">
+                        <h3 class="certificate-title">Project Management</h3>
+                        <p class="certificate-issuer">Issued by Business College</p>
+                        <p class="certificate-date">Completed: November 2022</p>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                        <div class="certificate-actions">
+                            <button class="action-btn view-btn" data-index="3">
+                                <i class="fas fa-expand"></i> View
+                            </button>
+                            <button class="action-btn download-btn" data-index="3">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                            <button class="action-btn share-btn">
+                                <i class="fas fa-share-alt"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <span class="close-btn" id="close-btn">×</span>
+        <div class="nav-btn prev-btn" id="prev-btn"><i class="fas fa-chevron-left"></i></div>
+        <div class="lightbox-content">
+            <div class="lightbox-img-container">
+                <img src="" alt="" class="lightbox-img" id="lightbox-img">
+            </div>
+            <div class="lightbox-details" id="lightbox-details">
+                <!-- Details will be inserted here by JavaScript -->
+            </div>
+            <div class="lightbox-actions">
+                <button class="lightbox-btn" id="lightbox-download">
+                    <i class="fas fa-download"></i> Download
+                </button>
+                <button class="lightbox-btn" id="lightbox-share">
+                    <i class="fas fa-share-alt"></i> Share
+                </button>
+            </div>
+        </div>
+        <div class="nav-btn next-btn" id="next-btn"><i class="fas fa-chevron-right"></i></div>
+    </div>
+
+    <div class="share-modal" id="share-modal">
+        <div class="share-content animate__animated animate__fadeInUp">
+            <span class="share-close" id="share-close">×</span>
+            <h3 class="share-title">Share This Certificate</h3>
+            <div class="share-buttons">
+                <a href="#" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-btn twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-btn linkedin"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" class="social-btn instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-btn tiktok"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const certificates = [
+                {
+                    img: 'metricRC.jpg',
+                    title: 'Web Development Master',
+                    issuer: 'Issued by Tech Academy',
+                    date: 'Completed: June 2023',
+                    verifyUrl: '#',
+                    downloadUrl: 'metricRC.jpg',
+                    description: 'This certificate verifies the completion of the Web Development Master course covering HTML, CSS, JavaScript, and modern frameworks.'
+                },
+                {
+                    img: 'interRC.jpg',
+                    title: 'Data Science Fundamentals',
+                    issuer: 'Issued by Data Institute',
+                    date: 'Completed: March 2023',
+                    verifyUrl: '#',
+                    downloadUrl: 'interRC.jpg',
+                    description: 'Certificate for completing the Data Science Fundamentals program including Python, Pandas, and Machine Learning basics.'
+                },
+                {
+                    img: 'metricRC.jpg',
+                    title: 'UX Design Professional',
+                    issuer: 'Issued by Design School',
+                    date: 'Completed: January 2023',
+                    verifyUrl: '#',
+                    downloadUrl: 'metricRC.jpg',
+                    description: 'Professional UX Design certification covering user research, wireframing, prototyping, and usability testing.'
+                },
+                {
+                    img: 'NICON Certificate.jpg',
+                    title: 'Project Management',
+                    issuer: 'Issued by Business College',
+                    date: 'Completed: November 2022',
+                    verifyUrl: '#',
+                    downloadUrl: 'NICON Certificate.jpg',
+                    description: 'Project Management Professional certification covering Agile, Scrum, and traditional project management methodologies.'
+                }
+            ];
+            
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxImgContainer = document.querySelector('.lightbox-img-container');
+            const lightboxDetails = document.getElementById('lightbox-details');
+            const closeBtn = document.getElementById('close-btn');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const viewButtons = document.querySelectorAll('.view-btn');
+            const downloadButtons = document.querySelectorAll('.download-btn');
+            const shareButtons = document.querySelectorAll('.share-btn');
+            const lightboxDownload = document.getElementById('lightbox-download');
+            const lightboxShare = document.getElementById('lightbox-share');
+            const shareModal = document.getElementById('share-modal');
+            const shareClose = document.getElementById('share-close');
+            const parallaxBg = document.getElementById('parallax-bg');
+            const socialButtons = document.querySelectorAll('.social-btn');
+            
+            let currentIndex = 0;
+            let currentCertificate = null;
+            let isAnimating = false;
+            
+            // Confetti Setup
+            const confettiCanvas = document.getElementById('confetti-canvas');
+            const confettiCtx = confettiCanvas.getContext('2d');
+            let confettiParticles = [];
+            
+            function initConfetti() {
+                const gallery = document.querySelector('.certificate-gallery');
+                confettiCanvas.width = gallery.offsetWidth;
+                confettiCanvas.height = gallery.offsetHeight;
+                
+                confettiParticles = [];
+                for (let i = 0; i < 100; i++) {
+                    confettiParticles.push({
+                        x: Math.random() * confettiCanvas.width,
+                        y: Math.random() * confettiCanvas.height - confettiCanvas.height,
+                        size: Math.random() * 10 + 5,
+                        speed: Math.random() * 3 + 2,
+                        color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+                        rotation: Math.random() * 360,
+                        rotationSpeed: Math.random() * 5 - 2.5
+                    });
+                }
+            }
+            
+            function animateConfetti() {
+                confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+                
+                confettiParticles.forEach(particle => {
+                    confettiCtx.save();
+                    confettiCtx.translate(particle.x, particle.y);
+                    confettiCtx.rotate(particle.rotation * Math.PI / 180);
+                    
+                    confettiCtx.fillStyle = particle.color;
+                    confettiCtx.fillRect(-particle.size/2, -particle.size/2, particle.size, particle.size);
+                    
+                    confettiCtx.restore();
+                    
+                    particle.y += particle.speed;
+                    particle.rotation += particle.rotationSpeed;
+                    
+                    if (particle.y > confettiCanvas.height) {
+                        particle.y = -particle.size;
+                        particle.x = Math.random() * confettiCanvas.width;
+                    }
+                });
+                
+                requestAnimationFrame(animateConfetti);
+            }
+            
+            function openLightbox(index) {
+                currentIndex = index;
+                currentCertificate = certificates[index];
+                updateLightbox();
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                updateBackground(index);
+            }
+            
+            function updateLightbox(direction = null) {
+                if (isAnimating) return;
+                
+                const cert = certificates[currentIndex];
+                
+                if (direction) {
+                    isAnimating = true;
+                    lightboxImg.classList.add('flip-out');
+                    
+                    setTimeout(() => {
+                        lightboxImg.src = cert.img;
+                        lightboxImg.classList.remove('flip-out');
+                        lightboxImg.classList.add('flip-in');
+                        
+                        updateLightboxDetails();
+                        
+                        setTimeout(() => {
+                            lightboxImg.classList.remove('flip-in');
+                            isAnimating = false;
+                        }, 500);
+                    }, 500);
+                } else {
+                    lightboxImg.src = cert.img;
+                    updateLightboxDetails();
+                }
+            }
+            
+            function updateLightboxDetails() {
+                const cert = certificates[currentIndex];
+                lightboxDetails.innerHTML = `
+                    <h3>${cert.title}</h3>
+                    <p><strong>${cert.issuer}</strong></p>
+                    ${cert.date ? `<p>${cert.date}</p>` : ''}
+                    <p>${cert.description}</p>
+                `;
+                
+                lightboxDownload.onclick = function() {
+                    downloadImage(cert.downloadUrl, cert.title);
+                };
+            }
+            
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            function showPrev() {
+                if (isAnimating) return;
+                
+                prevBtn.classList.add('clicked');
+                setTimeout(() => prevBtn.classList.remove('clicked'), 400);
+                
+                currentIndex = (currentIndex - 1 + certificates.length) % certificates.length;
+                currentCertificate = certificates[currentIndex];
+                updateLightbox('prev');
+                updateBackground(currentIndex);
+            }
+            
+            function showNext() {
+                if (isAnimating) return;
+                
+                nextBtn.classList.add('clicked');
+                setTimeout(() => nextBtn.classList.remove('clicked'), 400);
+                
+                currentIndex = (currentIndex + 1) % certificates.length;
+                currentCertificate = certificates[currentIndex];
+                updateLightbox('next');
+                updateBackground(currentIndex);
+            }
+            
+            function downloadImage(url, title) {
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) throw new Error('Network response was not ok');
+                        return response.blob();
+                    })
+                    .then(blob => {
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(blob);
+                        link.download = `${title.replace(/\s+/g, '_').toLowerCase()}.jpg`;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        URL.revokeObjectURL(link.href);
+                    })
+                    .catch(error => console.error('Download failed:', error));
+            }
+            
+            function openShareModal() {
+                shareModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                updateSocialLinks();
+            }
+            
+            function closeShareModal() {
+                shareModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            function updateBackground(index) {
+                parallaxBg.className = 'parallax-bg bg-color-' + index;
+            }
+            
+            function updateSocialLinks() {
+                if (!currentCertificate) return;
+                
+                const url = encodeURIComponent(window.location.href);
+                const title = encodeURIComponent(`Check out my "${currentCertificate.title}" certificate!`);
+                const imageUrl = encodeURIComponent(currentCertificate.img);
+                
+                document.querySelector('.facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                document.querySelector('.twitter').href = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+                document.querySelector('.linkedin').href = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${title}&summary=${encodeURIComponent(currentCertificate.description)}`;
+                document.querySelector('.whatsapp').href = `https://wa.me/?text=${title}%20${url}`;
+                document.querySelector('.instagram').href = `https://www.instagram.com/share?url=${url}&caption=${title}`;
+                document.querySelector('.tiktok').href = `https://www.tiktok.com/?shareUrl=${url}&title=${title}`;
+            }
+            
+            // Event Listeners
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    openLightbox(index);
+                });
+            });
+            
+            downloadButtons.forEach((button, index) => {
+                button.addEventListener('click', function() {
+                    const cert = certificates[index];
+                    downloadImage(cert.downloadUrl, cert.title);
+                });
+            });
+            
+            shareButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.closest('.certificate-item').querySelector('.certificate-img').getAttribute('data-index'));
+                    currentCertificate = certificates[index];
+                    openShareModal();
+                });
+            });
+            
+            closeBtn.addEventListener('click', closeLightbox);
+            prevBtn.addEventListener('click', showPrev);
+            nextBtn.addEventListener('click', showNext);
+            lightboxShare.addEventListener('click', openShareModal);
+            shareClose.addEventListener('click', closeShareModal);
+            
+            document.addEventListener('keydown', function(e) {
+                if (lightbox.classList.contains('active')) {
+                    if (e.key === 'Escape') {
+                        closeLightbox();
+                    } else if (e.key === 'ArrowLeft') {
+                        showPrev();
+                    } else if (e.key === 'ArrowRight') {
+                        showNext();
+                    }
+                }
+                
+                if (shareModal.classList.contains('active') && e.key === 'Escape') {
+                    closeShareModal();
+                }
+            });
+            
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+            
+            shareModal.addEventListener('click', function(e) {
+                if (e.target === shareModal) {
+                    closeShareModal();
+                }
+            });
+            
+            window.addEventListener('scroll', function() {
+                const scrollValue = window.scrollY;
+                parallaxBg.style.transform = `translateY(${scrollValue * 0.5}px)`;
+            });
+            
+            window.addEventListener('resize', function() {
+                initConfetti();
+            });
+            
+            // Initialize
+            initConfetti();
+            animateConfetti();
+        });
+    </script>
+</body>
+</html>

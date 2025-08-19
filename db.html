@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mind-Blowing Contact Form</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Background gradient animation */
+    body {
+      background: linear-gradient(135deg, #1e3a8a, #7c3aed, #db2777);
+      background-size: 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating box animation */
+    .float-animation {
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* Neon button glow */
+    @keyframes neonGlow {
+      0% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.5), 0 0 20px rgba(59, 130, 246, 0.3); }
+      100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 40px rgba(59, 130, 246, 0.5); }
+    }
+
+    /* Pulse animation */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* Placeholder letter animation */
+    @keyframes letterMove {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-36px); opacity: 1; font-size: 0.875rem; }
+    }
+
+    /* Input styles */
+    .input-container {
+      position: relative;
+    }
+    .input-glow {
+      transition: all 0.4s ease;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 0;
+      padding-bottom: 8px;
+      color: white;
+    }
+    .input-glow:focus {
+      border-bottom-color: #3b82f6;
+      box-shadow: 0 2px 15px rgba(59, 130, 246, 0.7);
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.2);
+      outline: none;
+    }
+    .input-glow:hover {
+      border-bottom-color: #a855f7;
+      box-shadow: 0 2px 10px rgba(168, 85, 247, 0.5);
+    }
+
+    .placeholder-text {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      color: rgba(0, 0, 0, 0.8);
+      pointer-events: none;
+      display: inline-flex;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .placeholder-letter {
+      display: inline-block;
+      transition: all 0.5s ease;
+    }
+    .input-glow:hover + .placeholder-text {
+      opacity: 1;
+    }
+    .input-glow:hover + .placeholder-text .placeholder-letter {
+      animation: letterMove 0.5s ease forwards;
+    }
+
+    .input-label {
+      position: absolute;
+      top: -20px;
+      left: 0;
+      color: white;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .input-glow:hover ~ .input-label {
+      opacity: 0;
+      display: none;
+    }
+
+    .input-glow:not(:placeholder-shown) + .placeholder-text,
+    .input-glow:not(:placeholder-shown) ~ .input-label {
+      opacity: 0;
+      display: none;
+    }
+
+    /* Button style */
+    .btn-neon {
+      transition: all 0.4s ease;
+      background: linear-gradient(45deg, #3b82f6, #a855f7);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-neon:hover {
+      transform: translateY(-5px);
+      animation: neonGlow 1.5s ease-in-out infinite alternate;
+    }
+    .btn-neon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: 0.5s;
+    }
+    .btn-neon:hover::before {
+      left: 100%;
+    }
+
+    /* Map section */
+    .map-container {
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+    .map-container:hover {
+      transform: scale(1.05) rotate(1deg);
+      box-shadow: 0 0 30px rgba(236, 72, 153, 0.7);
+    }
+    .map-container::after {
+      content: 'Explore Our Location';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 500;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    .map-container:hover::after {
+      opacity: 1;
+    }
+
+    /* Glassmorphism effect */
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+  <div class="max-w-5xl w-full glass-effect rounded-3xl shadow-2xl flex flex-col lg:flex-row overflow-hidden float-animation">
+    <!-- Form Section -->
+    <div class="w-full lg:w-1/2 p-10">
+      <h2 class="text-4xl font-extrabold text-white mb-8 drop-shadow-lg">Connect With Us</h2>
+      <!-- Removed PHP and changed method to '#' -->
+      <form action="submit_form.php" method="POST" class="space-y-6">
+        <div class="input-container relative">
+          <input type="text" id="name" name="name" class="input-glow w-full p-4 text-white" placeholder="Your Name" required />
+          <span class="placeholder-text" data-text="Your Name"></span>
+        </div>
+        <div class="input-container relative">
+          <input type="email" id="email" name="email" class="input-glow w-full p-4 text-white" placeholder="Your Email" required />
+          <span class="placeholder-text" data-text="Your Email"></span>
+        </div>
+        <div class="input-container relative">
+          <input type="text" id="cnic" name="cnic" class="input-glow w-full p-4 text-white" placeholder="Your CNIC" required />
+          <span class="placeholder-text" data-text="Your CNIC"></span>
+        </div>
+        <div class="input-container relative">
+          <input type="text" id="father_name" name="father_name" class="input-glow w-full p-4 text-white" placeholder="Father's Name" required />
+          <span class="placeholder-text" data-text="Father's Name"></span>
+        </div>
+        <div class="input-container relative">
+          <textarea id="message" name="message" class="input-glow w-full p-4 text-white" rows="5" placeholder="Your Message" required></textarea>
+          <span class="placeholder-text" data-text="Your Message"></span>
+        </div>
+        <button type="submit" class="btn-neon w-full text-white p-4 rounded-xl font-bold text-lg animate-pulse">
+          Send Message
+        </button>
+      </form>
+    </div>
+
+    <!-- Map Section -->
+    <div class="w-full lg:w-1/2 p-10 flex flex-col justify-center">
+      <h3 class="text-2xl font-semibold text-white mb-6 drop-shadow-lg">Find Us</h3>
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.9537353153167!3d-37.81627927975171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf0727e3b7f4b1e0!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sus!4v1635781234567!5m2!1sen!2sus"
+          width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy">
+        </iframe>
+      </div>
+      <p class="mt-6 text-white text-opacity-90">123 Example St, Melbourne, VIC, Australia</p>
+    </div>
+  </div>
+
+   <script>
+    document.querySelectorAll('.input-glow').forEach(input => {
+      const placeholderSpan = input.nextElementSibling;
+      const originalPlaceholder = input.getAttribute('placeholder');
+      const text = placeholderSpan.dataset.text;
+      const letters = text.split('').filter(char => char !== ' '); // Split into letters, ignore spaces
+      const spaceIndices = text.split('').map((char, i) => char === ' ' ? i : -1).filter(i => i !== -1);
+
+      // Initialize placeholder span
+      let letterIndex = 0;
+      placeholderSpan.innerHTML = text.split('').map((char, i) => {
+        if (char === ' ') {
+          return `<span style="margin-left: 4px;"></span>`;
+        }
+        const span = `<span class="placeholder-letter" style="animation-delay: ${letterIndex * 0.1}s">${char}</span>`;
+        letterIndex++;
+        return span;
+      }).join('');
+
+      input.addEventListener('input', () => {
+        if (input.value) {
+          placeholderSpan.style.opacity = '0';
+          input.placeholder = '';
+        } else {
+          placeholderSpan.style.opacity = '0';
+          input.placeholder = originalPlaceholder;
+        }
+      });
+
+      input.addEventListener('mouseenter', () => {
+        input.placeholder = ''; // Clear placeholder on hover
+        placeholderSpan.style.pointerEvents = 'none';
+        placeholderSpan.style.opacity = '1';
+      });
+
+      input.addEventListener('mouseleave', () => {
+        if (!input.value) {
+          input.placeholder = originalPlaceholder; // Restore placeholder
+          placeholderSpan.style.opacity = '0';
+          placeholderSpan.style.top = '16px';
+          // Recreate placeholder to reset animation
+          letterIndex = 0;
+          placeholderSpan.innerHTML = text.split('').map((char, i) => {
+            if (char === ' ') {
+              return `<span style="margin-left: 4px;"></span>`;
+            }
+            const span = `<span class="placeholder-letter" style="animation-delay: ${letterIndex * 0.1}s">${char}</span>`;
+            letterIndex++;
+            return span;
+          }).join('');
+        } else {
+          placeholderSpan.style.opacity = '0';
+        }
+      });
+
+      // Handle animation end to keep text at label position smoothly
+      placeholderSpan.addEventListener('animationend', (e) => {
+        if (e.target.classList.contains('placeholder-letter') && input.matches(':hover') && !input.value) {
+          const allLetters = placeholderSpan.querySelectorAll('.placeholder-letter');
+          if (e.target === allLetters[allLetters.length - 1]) { // Last letter
+            placeholderSpan.style.opacity = '1';
+            placeholderSpan.style.top = '-20px';
+            placeholderSpan.innerHTML = text; // Replace with full text
+            placeholderSpan.style.fontSize = '0.875rem';
+            placeholderSpan.style.fontWeight = '500';
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
